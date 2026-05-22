@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-dojo-black: #0A0A0A;
+    --color-dojo-dark: #111111;
+    --color-crimson: #C41E3A;
+    --color-crimson-dark: #8B0000;
+    --color-gold: #B8960C;
+    --color-gold-dark: #8C7209;
+    --color-parchment: #F5F0E8;
+    --color-slate-50: #F8FAFC;
+    --color-slate-100: #F1F5F9;
+    --color-slate-200: #E2E8F0;
+    --color-slate-300: #CBD5E1;
+    --color-slate-400: #94A3B8;
+    --color-slate-500: #64748B;
+    --color-slate-600: #475569;
+    --color-slate-700: #334155;
+    --color-slate-800: #1E293B;
+    --color-slate-900: #0F172A;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-[var(--color-slate-800)];
+  }
+
+  body {
+    @apply bg-dojo-black text-parchment antialiased;
+    font-family: var(--font-crimson), serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(196, 30, 58, 0.4);
+    color: #F5F0E8;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C41E3A;
+    border-radius: 3px;
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/grain.png');
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  @media print {
+    body {
+      background: white;
+      color: black;
+    }
+    .no-print {
+      display: none !important;
+    }
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .dojo-card {
+    @apply bg-dojo-dark border border-slate-800 rounded-lg p-6;
+    transition: all 0.3s ease;
+  }
+
+  .dojo-card:hover {
+    @apply border-crimson/30 shadow-card-hover;
+    transform: translateY(-4px);
+  }
+
+  .crimson-btn {
+    @apply bg-crimson text-white font-mono text-sm uppercase tracking-widest px-8 py-4;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .crimson-btn::after {
+    content: '';
+    @apply absolute inset-0 bg-white/10;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .crimson-btn:hover::after {
+    transform: translateX(0);
+  }
+
+  .crimson-btn:hover {
+    @apply shadow-crimson-glow;
+  }
+
+  .ghost-btn {
+    @apply border border-parchment/30 text-parchment font-mono text-sm uppercase tracking-widest px-8 py-4;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .ghost-btn:hover {
+    @apply border-crimson text-crimson shadow-crimson-glow;
+  }
+
+  .section-heading {
+    @apply font-display text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide;
+  }
+
+  .section-subheading {
+    @apply font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-crimson;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #B8960C 0%, #F5D75C 50%, #8C7209 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-red {
+    background: linear-gradient(135deg, #C41E3A 0%, #F26F89 50%, #9E1830 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer-effect {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(196, 30, 58, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(184, 150, 12, 0.3),
+                0 0 40px rgba(184, 150, 12, 0.1),
+                0 0 60px rgba(184, 150, 12, 0.05);
+  }
+
+  .underline-red {
+    @apply relative inline-block;
+  }
+
+  .underline-red::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-crimson;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .underline-red:hover::after {
+    transform: scaleX(1);
+  }
+
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .masonry-grid { column-count: 2; }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry-grid { column-count: 3; }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+}
