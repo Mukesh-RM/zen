@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
-    domains: ['images.unsplash.com', 'plus.unsplash.com'],
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
 };
 
